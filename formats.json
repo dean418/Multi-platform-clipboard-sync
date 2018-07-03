@@ -1,0 +1,28 @@
+{
+	"nested": {
+		"baseMessage": {
+			"nested": {
+				"formats": {
+					"fields": {
+						"text": {
+							"type": "string",
+							"id": 1
+						},
+						"rtf": {
+							"type": "string",
+							"id": 2
+						},
+						"html": {
+							"type": "string",
+							"id": 3
+						},
+						"image": {
+							"type": "bytes",
+							"id": 4
+						}
+					}
+				}
+			}
+		}
+	}
+}
