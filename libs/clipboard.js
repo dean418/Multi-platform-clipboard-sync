@@ -18,7 +18,6 @@ class Clipboard extends EventEmitter {
 		let availableFormats = clipboard.availableFormats();
 		let message = {}
 
-
 		if (availableFormats.indexOf("image/png") > -1) {
 			message['image'] = clipboard.readImage().toPNG();
 		}
@@ -40,14 +39,14 @@ class Clipboard extends EventEmitter {
 		let message = type.create(protoMessage);
 		let buffer = type.encode(message).finish();
 
-		this.emit("send", buffer)
+		this.emit("send", buffer);
 	}
 
 	static decode(buffer) {
 		clipboard.clear();
 		let root = protobuf.Root.fromJSON(formats);
 		let type = root.lookupType("baseMessage.formats");
-		let data = type.decode(buffer)
+		let data = type.decode(buffer);
 		let output = {}
 		if (data["text"]) {
 			output['text'] = data['text'];
@@ -58,11 +57,10 @@ class Clipboard extends EventEmitter {
 		if (data["html"]) {
 			output['html'] = data['html'];
 		}
-		if (data["image"].length > 0 ) {
-			output["image"] = nativeImage.createFromBuffer(data["image"])
+		if (data["image"].length > 0) {
+			output["image"] = nativeImage.createFromBuffer(data["image"]);
 		}
-		console.log(output)
-		clipboard.write(output)
+		clipboard.write(output);
 	}
 }
 

@@ -1,11 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<title>Document</title>
+	<link rel="stylesheet" href="./assets/style.css">
 </head>
 
 <body>
-	<button id="test">test</button>
+
+	<div class="dashContainer">
+			<div id="sidebar">
+			  <button id="click"> click </button>
+			  <button id="test"> test </button>
+			  <div class="item" id="settings">
+				<p class="itemContent">Settings</p>
+				<!-- <div id="arrow"></div> -->
+			  </div>
+			  
+			  <div class="list">Device list</div>
+			</div>
+			
+			<div class="content">
+			  <div class="header">
+				<h1 class="name">Name</h1>
+				<button class="icon">Edit</button>
+			  </div>
+			  
+			  <div class="middle">
+				<a>
+				  <span id="syncBtn" class="btn">Sync clipboard</span>
+				</a>
+			  </div>
+			</div>
+		  </div>
+
+	<script src="./assets/index.js"></script>
 	<script src="index.js"></script>
 </body>
+
 </html>

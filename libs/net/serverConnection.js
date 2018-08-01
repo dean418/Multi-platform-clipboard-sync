@@ -1,14 +1,15 @@
 // creates server connection
+// create server and listen on port
 const net = require('net');
-const Socket = require('./socket')
-const socketManger = require('./socketManager')
+const Socket = require('./socket');
+const socketManger = require('./socketManager');
 
 class ServerSocket extends Socket {
-	static createServer(port){
-		 let server = net.createServer( (socket) => {
-			socketManger.addSocket(new this(socket,socketManger))
+	static createServer(port) {
+		let server = net.createServer((socket) => {
+			socketManger.addSocket(new this(socket, socketManger));
 		});
-		server.listen(port)
+		server.listen(port);
 	}
 }
 
