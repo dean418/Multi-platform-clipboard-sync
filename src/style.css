@@ -1,0 +1,97 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+h1 {
+  text-align: center;
+}
+
+.dashContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+#sidebar {
+  width: 20%;
+  height: 100%;
+  text-align: center;
+  overflow-y: auto;
+  direction: rtl;
+  background-color: #0074F9;
+}
+
+.list {
+  color: #FFFFFF;
+  background-color: #001f3f;
+}
+
+.item {
+  width: 100%;
+  display: flex;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  direction: ltr;
+}
+
+.itemContent {
+  width: 100%;
+  align-self: center;
+  color: white;
+} 
+
+.item:hover {
+   background-color: #597186;
+}
+
+#arrow {
+  width: 0px; 
+  height: 0px; 
+  border-top: 25px solid transparent;
+  border-bottom: 25px solid transparent;
+  border-right: 25px solid #CCCCCC;
+  justify-content: flex-end;
+}
+
+.content {
+  width: 80%;
+  height: 100%;
+  background-color: #CCCCCC
+}
+
+.header {
+  width: 100%;
+  display: flex; 
+/*   background-color: #4C5560; */
+  justify-content: center;
+}
+
+.name {
+  text-decoration: underline;
+}
+
+.icon {
+  height: 50%;
+  margin-left: 1%;
+  align-self: center;
+}
+
+.middle {
+  margin-top: 10%;
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  padding: 10px;
+  position: relative;
+  color: white;
+  cursor: pointer;
+  border: 1px solid #253947;
+  background-color: #0074D9;
+}

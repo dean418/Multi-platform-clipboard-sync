@@ -1,30 +1,42 @@
-import { clearTimeout } from 'timers';
-
 const clipboard = require('./libs/clipboard');
 const server = require('./libs/net/serverConnection');
 const client = require('./libs/net/clientConnection');
 const socketManager = require('./libs/net/socketManager');
+const broadcast = require('./libs/discovery/broadcast');
 
-let button = document.getElementById("test"); 
+(async () => {
+	let button = document.getElementById("test");
+	let Clipboard = new clipboard(button);
 
-let Clipboard = new clipboard(button);
+	server.createServer(7070);
+	client.createConnection(7070, '192.168.0.20');// connect to a target device
 
-server.createServer(7070);
-client.createConnection(7070,'localhost');
+	let ping = await broadcast.createSocket(41234, "hello");
 
-socketManager.on("newSocket", (socket) => {
-	// send to UI class
-});
-
-socketManager.on("removeSocket", (socket) => {
-	// remove from UI
-});
-
-Clipboard.on("send", (buffer) => {
-	for (let socket of socketManager.sockets.values()) {
-		socket.socket.write(buffer);
+	// boradcast this device every 5 seconds
+	function broadcastNow(){
+		ping.broadcast();
+		setTimeout(broadcastNow, 5000);
 	}
-});
+
+	broadcastNow();
+
+	socketManager.on("newSocket", (socket) => {
+		// console.log(socket)
+		// send to UI class
+	});
+
+	socketManager.on("removeSocket", (socket) => {
+		// remove from UI
+	});
+
+	Clipboard.on("send", (buffer) => { // when the sync button is pressed (test button for now)
+		for (let socket of socketManager.sockets.values()) {
+			socket.socket.write(buffer);
+		}
+	});
+})();
+
 
 // let broadcastTimeout
 // onupdate(){
@@ -35,3 +47,4 @@ Clipboard.on("send", (buffer) => {
 // }
 // onupdate()
 // checkbox.onchange = onupdate
+// 

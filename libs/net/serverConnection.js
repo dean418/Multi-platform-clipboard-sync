@@ -1,4 +1,3 @@
-// creates server connection
 // create server and listen on port
 const net = require('net');
 const Socket = require('./socket');

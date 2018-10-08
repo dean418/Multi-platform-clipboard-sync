@@ -10,7 +10,7 @@ class Socket {
 	}
 
 	onData(data) {
-		console.log(data);
+		// console.log("data");
 		clipboard.decode(data);
 	}
 

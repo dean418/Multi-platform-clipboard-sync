@@ -28,8 +28,6 @@ class Broadcast {
 	}
 
 	onMesage(msg, rinfo) {
-		console.log(msg);
-		console.log(rinfo);
 	}
 
 	onError() {
@@ -44,8 +42,8 @@ class Broadcast {
 
 module.exports = Broadcast;
 
-(async () => {
-	let me = await Broadcast.createSocket(41234, "hello");
+// (async () => {
+// 	let me = await Broadcast.createSocket(41234, "hello");
 
-	me.broadcast();
-})();
+// 	me.broadcast();
+// })();
