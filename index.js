@@ -3,48 +3,67 @@ const server = require('./libs/net/serverConnection');
 const client = require('./libs/net/clientConnection');
 const socketManager = require('./libs/net/socketManager');
 const broadcast = require('./libs/discovery/broadcast');
+const ui = require('./libs/UI');
 
 (async () => {
-	let button = document.getElementById("test");
+	let button = document.getElementById("syncBtn");
 	let Clipboard = new clipboard(button);
 
+	let UI = new ui();
+
 	server.createServer(7070);
-	client.createConnection(7070, '192.168.0.20');// connect to a target device
 
-	let ping = await broadcast.createSocket(41234, "hello");
+	// connect to a target device
+	client.createConnection(7070, '10.154.73.79');
 
-	// boradcast this device every 5 seconds
+	// creates instance of Broadcast class inside the createSocket method
+	let broadcaster = await broadcast.createSocket(41234, "hello"); 
+
+	// boradcast current device every 5 seconds
 	function broadcastNow(){
-		ping.broadcast();
+		broadcaster.broadcast();
 		setTimeout(broadcastNow, 5000);
 	}
 
 	broadcastNow();
 
-	socketManager.on("newSocket", (socket) => {
-		// console.log(socket)
-		// send to UI class
+	//when the broadcaster recieves a ping from another device
+	broadcaster.on("newDevice", (deviceInfo) => {
+		UI.addDevice(deviceInfo);
 	});
 
-	socketManager.on("removeSocket", (socket) => {
-		// remove from UI
-	});
-
-	Clipboard.on("send", (buffer) => { // when the sync button is pressed (test button for now)
-		for (let socket of socketManager.sockets.values()) {
-			socket.socket.write(buffer);
+	// when the sync button is pressed (test button for now)
+	Clipboard.on("send", (buffer) => {
+		for (let device of socketManager.sockets.values()) {
+			device.socket.write(buffer);
 		}
 	});
 })();
 
 
-// let broadcastTimeout
-// onupdate(){
-// 	clearTimeout(broadcastTimeout)
-// 	if(checkbox.checked){
-// 		let broadcastTimeout = setTimeout(emit.broadcast,1500)
-// 	}
-// }
-// onupdate()
-// checkbox.onchange = onupdate
-// 
+/* dynamically update target device
+
+X.on("updateTarget", (ip) => {
+	client.createConnection(7070, ip);
+})
+*/
+
+/* allow user to start and stop broadcasting
+
+let broadcastTimeout
+onupdate(){
+	clearTimeout(broadcastTimeout)
+	if(checkbox.checked){
+		let broadcastTimeout = setTimeout(emit.broadcast,1500)
+	}
+}
+onupdate()
+checkbox.onchange = onupdate
+*/
+
+
+
+
+/*(socketManager.on("removeSocket", (socket) => {
+	// remove from UI
+});*/

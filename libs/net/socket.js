@@ -15,6 +15,7 @@ class Socket {
 	}
 
 	onClose() {
+		console.log("rip socket")
 		this.socketManager.removeSocket(this);
 	}
 }

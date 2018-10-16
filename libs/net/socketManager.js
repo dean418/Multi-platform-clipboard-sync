@@ -1,15 +1,15 @@
 // manage a list of socket connections
 const EventEmitter = require('events');
 
-class SocketManger extends EventEmitter {
+class SocketManager extends EventEmitter {
 	constructor(){
 		super();
 		this.sockets = new Set();
 	}
 
-	addSocket(socket) {
+	addSocket(socket, addr) {
 		this.sockets.add(socket);
-		this.emit("newSocet", socket);
+		this.emit("newSocket", addr);
 	}
 
 	removeSocket(socket){
@@ -18,5 +18,5 @@ class SocketManger extends EventEmitter {
 	}
 }
 
-let socketManger = new SocketManger();
-module.exports = socketManger;
+let socketManager = new SocketManager();
+module.exports = socketManager;

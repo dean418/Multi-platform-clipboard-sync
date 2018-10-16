@@ -12,6 +12,7 @@
     "electron": "^3.0.0-beta.1"
   },
   "dependencies": {
-    "protobufjs": "^6.8.6"
+    "protobufjs": "^6.8.6",
+    "uuid": "^3.3.2"
   }
 }

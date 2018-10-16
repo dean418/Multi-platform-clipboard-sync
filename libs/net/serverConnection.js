@@ -6,7 +6,8 @@ const socketManger = require('./socketManager');
 class ServerSocket extends Socket {
 	static createServer(port) {
 		let server = net.createServer((socket) => {
-			socketManger.addSocket(new this(socket, socketManger));
+			let address = socket.address().address;
+			socketManger.addSocket(new this(socket, socketManger), address);
 		});
 		server.listen(port);
 	}

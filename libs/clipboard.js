@@ -61,6 +61,7 @@ class Clipboard extends EventEmitter {
 			output["image"] = nativeImage.createFromBuffer(data["image"]);
 		}
 		clipboard.write(output);
+		console.log("decoded");
 	}
 }
 
